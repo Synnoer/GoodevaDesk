@@ -9,7 +9,7 @@
       "category": "billing",
       "confidence": 0.88,
       "matched_intent": "rule-matched (billing)",
-      "latency_ms": 90.68,
+      "latency_ms": 62.4,
       "entities_count": 8,
       "entities": [
         {
@@ -73,12 +73,12 @@
     "llm": {
       "category": "billing",
       "suggested_reply": "Halo, terima kasih telah menghubungi tim support kami terkait pertanyaan tagihan / pembayaran Anda. Kami sedang memeriksa rincian transaksi akun Anda dan akan segera memberikan konfirmasi lebih lanjut.",
-      "latency_ms": 663.85,
+      "latency_ms": 734.81,
       "provider": "Backend LLM (Gemini/Groq/Fallback)"
     },
     "comparison": {
       "category_agreement": true,
-      "gliner_vs_llm_speedup": "7.32x faster (GLiNER)",
+      "gliner_vs_llm_speedup": "11.78x faster (GLiNER)",
       "summary": "Match"
     }
   },
@@ -92,7 +92,7 @@
       "category": "technical",
       "confidence": 0.89,
       "matched_intent": "rule-matched (technical)",
-      "latency_ms": 84.59,
+      "latency_ms": 60.34,
       "entities_count": 6,
       "entities": [
         {
@@ -142,12 +142,12 @@
     "llm": {
       "category": "technical",
       "suggested_reply": "Halo, terima kasih telah melaporkan kendala teknis ini. Tim teknis kami sedang menginvestigasi log sistem terkait masalah tersebut. Mohon informasikan jika Anda memiliki tangkapan layar atau pesan kesalahan tambahan.",
-      "latency_ms": 11.95,
+      "latency_ms": 551.71,
       "provider": "Backend LLM (Gemini/Groq/Fallback)"
     },
     "comparison": {
       "category_agreement": true,
-      "gliner_vs_llm_speedup": "0.14x faster (GLiNER)",
+      "gliner_vs_llm_speedup": "9.14x faster (GLiNER)",
       "summary": "Match"
     }
   },
@@ -161,7 +161,7 @@
       "category": "account",
       "confidence": 0.6054,
       "matched_intent": "account management",
-      "latency_ms": 81.92,
+      "latency_ms": 58.62,
       "entities_count": 4,
       "entities": [
         {
@@ -197,12 +197,12 @@
     "llm": {
       "category": "account",
       "suggested_reply": "Halo, terima kasih telah menghubungi kami mengenai akun Anda. Demi keamanan, kami dapat membantu Anda melakukan verifikasi dan reset kredensial akun Anda. Tim kami akan memandu langkah selanjutnya.",
-      "latency_ms": 6.67,
+      "latency_ms": 403.59,
       "provider": "Backend LLM (Gemini/Groq/Fallback)"
     },
     "comparison": {
       "category_agreement": true,
-      "gliner_vs_llm_speedup": "0.08x faster (GLiNER)",
+      "gliner_vs_llm_speedup": "6.88x faster (GLiNER)",
       "summary": "Match"
     }
   },
@@ -216,7 +216,7 @@
       "category": "feature_request",
       "confidence": 0.85,
       "matched_intent": "rule-matched (feature_request)",
-      "latency_ms": 80.33,
+      "latency_ms": 59.36,
       "entities_count": 3,
       "entities": [
         {
@@ -245,12 +245,12 @@
     "llm": {
       "category": "feature_request",
       "suggested_reply": "Halo, terima kasih atas masukan dan saran fitur yang sangat berharga bagi kami. Tim produk kami telah mencatat permintaan ini untuk pertimbangan pembaruan sistem ke depan.",
-      "latency_ms": 8.82,
+      "latency_ms": 470.59,
       "provider": "Backend LLM (Gemini/Groq/Fallback)"
     },
     "comparison": {
       "category_agreement": true,
-      "gliner_vs_llm_speedup": "0.11x faster (GLiNER)",
+      "gliner_vs_llm_speedup": "7.93x faster (GLiNER)",
       "summary": "Match"
     }
   },
@@ -264,7 +264,7 @@
       "category": "general",
       "confidence": 0.6,
       "matched_intent": "rule-matched (general)",
-      "latency_ms": 76.08,
+      "latency_ms": 58.53,
       "entities_count": 3,
       "entities": [
         {
@@ -293,12 +293,12 @@
     "llm": {
       "category": "general",
       "suggested_reply": "Halo, terima kasih telah menghubungi tim support kami. Kami telah menerima pesan Anda dan agen kami akan segera menindaklanjuti pertanyaan Anda secepatnya.",
-      "latency_ms": 10.43,
+      "latency_ms": 380.89,
       "provider": "Backend LLM (Gemini/Groq/Fallback)"
     },
     "comparison": {
       "category_agreement": true,
-      "gliner_vs_llm_speedup": "0.14x faster (GLiNER)",
+      "gliner_vs_llm_speedup": "6.51x faster (GLiNER)",
       "summary": "Match"
     }
   }
