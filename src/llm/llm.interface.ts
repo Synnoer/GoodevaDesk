@@ -2,7 +2,8 @@ export interface LLMTicketAnalysis {
   category: string;
   suggestedReply: string;
   confidence?: number;
-  provider: 'gemini' | 'groq' | 'fallback';
+  provider: 'gemini' | 'groq' | 'fallback' | 'cache';
+  cached?: boolean;
 }
 
 export interface ILLMProvider {

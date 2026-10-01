@@ -11,6 +11,7 @@ import { ApiTags, ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrganizationsService } from './organizations.service';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { ApiKeyGuard } from '../auth/api-key.guard';
+import { TenantRateLimitGuard } from '../auth/tenant-rate-limit.guard';
 import { CurrentOrg } from '../auth/current-org.decorator';
 import { Organization } from '@prisma/client';
 
@@ -32,7 +33,7 @@ export class OrganizationsController {
   }
 
   @Get('me')
-  @UseGuards(ApiKeyGuard)
+  @UseGuards(ApiKeyGuard, TenantRateLimitGuard)
   @ApiHeader({
     name: 'x-api-key',
     description: 'Organization API Key',

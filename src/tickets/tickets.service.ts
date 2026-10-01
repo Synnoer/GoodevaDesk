@@ -27,7 +27,7 @@ export class TicketsService {
     this.logger.log(`Creating ticket for organizationId=${organizationId}, email=${dto.customer_email}`);
 
     // LLM analysis for category classification and draft reply
-    const llmResult = await this.llmService.classifyAndDraftReply(dto.subject, dto.message);
+    const llmResult = await this.llmService.classifyAndDraftReply(organizationId, dto.subject, dto.message);
 
     const ticket = await this.prisma.ticket.create({
       data: {

@@ -16,6 +16,7 @@ import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketStatusDto } from './dto/update-ticket-status.dto';
 import { FilterTicketDto } from './dto/filter-ticket.dto';
 import { ApiKeyGuard } from '../auth/api-key.guard';
+import { TenantRateLimitGuard } from '../auth/tenant-rate-limit.guard';
 import { CurrentOrg } from '../auth/current-org.decorator';
 
 @ApiTags('Tickets')
@@ -24,7 +25,11 @@ import { CurrentOrg } from '../auth/current-org.decorator';
   description: 'Organization API Key for authentication and tenant isolation',
   required: true,
 })
-@UseGuards(ApiKeyGuard)
+@ApiResponse({
+  status: 429,
+  description: 'Too Many Requests - Tenant API rate limit exceeded.',
+})
+@UseGuards(ApiKeyGuard, TenantRateLimitGuard)
 @Controller('tickets')
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}

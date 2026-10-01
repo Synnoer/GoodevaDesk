@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { GeminiProvider } from './providers/gemini.provider';
 import { GroqProvider } from './providers/groq.provider';
 import { LLMTicketAnalysis } from './llm.interface';
+import { LLMCacheService } from './llm-cache.service';
+import { LLMTokenLimiterService } from './llm-token-limiter.service';
 
 @Injectable()
 export class LLMService {
@@ -13,35 +15,80 @@ export class LLMService {
     private readonly configService: ConfigService,
     private readonly geminiProvider: GeminiProvider,
     private readonly groqProvider: GroqProvider,
+    private readonly llmCacheService: LLMCacheService,
+    private readonly tokenLimiterService: LLMTokenLimiterService,
   ) {
     this.preferredProvider = this.configService.get<string>('LLM_PROVIDER', 'gemini').toLowerCase();
   }
 
-  async classifyAndDraftReply(subject: string, message: string): Promise<LLMTicketAnalysis> {
+  /**
+   * Classifies ticket and drafts reply with:
+   * 1. Redis classification cache check (exact / normalized similarity)
+   * 2. Per-tenant LLM token usage budget check
+   * 3. Primary/Secondary LLM provider invocation
+   * 4. Automatic caching and token consumption recording
+   * 5. Fallback heuristic engine if rate-limited or providers fail
+   */
+  async classifyAndDraftReply(
+    organizationId: string,
+    subject: string,
+    message: string,
+  ): Promise<LLMTicketAnalysis> {
+    // 1. Check Redis LLM Cache
+    if (organizationId) {
+      const cached = await this.llmCacheService.getCached(organizationId, subject, message);
+      if (cached) {
+        return cached;
+      }
+    }
+
+    // 2. Check LLM Token Quota for Tenant
+    if (organizationId) {
+      const estimatedTokens = this.tokenLimiterService.estimateTokens(subject, message);
+      const budget = await this.tokenLimiterService.checkTokenBudget(organizationId, estimatedTokens);
+
+      if (!budget.allowed) {
+        this.logger.warn(
+          `Tenant org=${organizationId} exceeded LLM token quota (${budget.currentUsage}/${budget.maxTokens}). Falling back to heuristic engine.`,
+        );
+        return this.heuristicFallback(subject, message);
+      }
+    }
+
     const primary = this.preferredProvider === 'groq' ? this.groqProvider : this.geminiProvider;
     const secondary = this.preferredProvider === 'groq' ? this.geminiProvider : this.groqProvider;
 
-    // 1. Try Primary Provider
+    let result: LLMTicketAnalysis | null = null;
+
+    // 3. Try Primary Provider
     if (primary.isAvailable()) {
       this.logger.log(`Attempting LLM classification using primary provider: ${primary.name}`);
-      const result = await primary.analyzeTicket(subject, message);
-      if (result) {
-        return result;
+      result = await primary.analyzeTicket(subject, message);
+      if (!result) {
+        this.logger.warn(`Primary provider ${primary.name} failed or returned empty. Trying fallback...`);
       }
-      this.logger.warn(`Primary provider ${primary.name} failed or returned empty. Trying fallback...`);
     }
 
-    // 2. Try Secondary Provider
-    if (secondary.isAvailable()) {
+    // 4. Try Secondary Provider
+    if (!result && secondary.isAvailable()) {
       this.logger.log(`Attempting LLM classification using secondary provider: ${secondary.name}`);
-      const result = await secondary.analyzeTicket(subject, message);
-      if (result) {
-        return result;
+      result = await secondary.analyzeTicket(subject, message);
+      if (!result) {
+        this.logger.warn(`Secondary provider ${secondary.name} also failed.`);
       }
-      this.logger.warn(`Secondary provider ${secondary.name} also failed.`);
     }
 
-    // 3. Smart Heuristic Fallback Engine
+    // 5. If providers succeeded, record tokens and save cache
+    if (result) {
+      if (organizationId) {
+        const consumedTokens = this.tokenLimiterService.estimateTokens(subject, message) + 150;
+        await this.tokenLimiterService.recordTokenUsage(organizationId, consumedTokens);
+        await this.llmCacheService.setCached(organizationId, subject, message, result);
+      }
+      return result;
+    }
+
+    // 6. Smart Heuristic Fallback Engine
     this.logger.log('Using rule-based heuristic fallback engine for classification & draft reply.');
     return this.heuristicFallback(subject, message);
   }

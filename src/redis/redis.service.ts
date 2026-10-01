@@ -97,6 +97,44 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  async incr(key: string, ttlSeconds?: number): Promise<number> {
+    if (!this.isConnected || !this.client) return 0;
+    try {
+      const res = await this.client.incr(key);
+      if (res === 1 && ttlSeconds && ttlSeconds > 0) {
+        await this.client.expire(key, ttlSeconds);
+      }
+      return res;
+    } catch (err: any) {
+      this.logger.warn(`Redis INCR error for key ${key}: ${err.message}`);
+      return 0;
+    }
+  }
+
+  async incrBy(key: string, amount: number, ttlSeconds?: number): Promise<number> {
+    if (!this.isConnected || !this.client) return 0;
+    try {
+      const res = await this.client.incrby(key, amount);
+      if (res === amount && ttlSeconds && ttlSeconds > 0) {
+        await this.client.expire(key, ttlSeconds);
+      }
+      return res;
+    } catch (err: any) {
+      this.logger.warn(`Redis INCRBY error for key ${key}: ${err.message}`);
+      return 0;
+    }
+  }
+
+  async ttl(key: string): Promise<number> {
+    if (!this.isConnected || !this.client) return -1;
+    try {
+      return await this.client.ttl(key);
+    } catch (err: any) {
+      this.logger.warn(`Redis TTL error for key ${key}: ${err.message}`);
+      return -1;
+    }
+  }
+
   async delByPattern(pattern: string): Promise<void> {
     if (!this.isConnected || !this.client) return;
     try {
