@@ -68,12 +68,10 @@ Semua key Redis diawali `tenantId`, sehingga cache tidak pernah mencampur data a
 
 Jika waktu pengerjaan lebih panjang, prioritasnya:
 
-1. **Antrean job AI.** Pindahkan klasifikasi dan pembuatan draft ke BullMQ dengan retry dan backoff, supaya endpoint pembuatan tiket langsung merespons.
-2. **Row-Level Security PostgreSQL.** Tambahkan lapisan isolasi di level database sebagai pelindung kedua di luar filter aplikasi.
-3. **Semantic cache.** Simpan embedding tiket di pgvector agar tiket yang mirip, bukan hanya identik, bisa memakai hasil klasifikasi yang sama.
-4. **Rate limiting per tenant.** Batasi request API dan pemakaian token LLM per tenant.
-5. **Circuit breaker.** Hentikan sementara panggilan ke provider yang gagal berulang, lalu pindah ke provider cadangan.
-6. **Tes otomatis.** Tambahkan e2e test yang membuktikan tenant A tidak bisa membaca atau mengubah data tenant B, plus unit test untuk invalidasi cache.
-7. **Observabilitas.** Catat latensi, tingkat cache hit, dan biaya token per tenant di dashboard.
-8. **Umpan balik agen.** Simpan koreksi agen pada kategori dan draft, lalu pakai data itu untuk mengevaluasi prompt dan memilih model.
-9. **Rotasi API key.** Dukung masa berlaku key dan rotasi tanpa downtime.
+1. **Row-Level Security PostgreSQL.** Tambahkan lapisan isolasi di level database sebagai pelindung kedua di luar filter aplikasi.
+2. **Semantic cache.** Simpan embedding tiket di pgvector agar tiket yang mirip, bukan hanya identik, bisa memakai hasil klasifikasi yang sama.
+3. **Circuit breaker.** Hentikan sementara panggilan ke provider yang gagal berulang, lalu pindah ke provider cadangan.
+4. **Tes otomatis.** Tambahkan e2e test yang membuktikan tenant A tidak bisa membaca atau mengubah data tenant B, plus unit test untuk invalidasi cache.
+5. **Observabilitas.** Catat latensi, tingkat cache hit, dan biaya token per tenant di dashboard.
+6. **Umpan balik agen.** Simpan koreksi agen pada kategori dan draft, lalu pakai data itu untuk mengevaluasi prompt dan memilih model.
+7. **Rotasi API key.** Dukung masa berlaku key dan rotasi tanpa downtime.
