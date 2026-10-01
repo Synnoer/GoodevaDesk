@@ -1,0 +1,305 @@
+[
+  {
+    "ticket": {
+      "customer_email": "finance@tokopedia-seller.com",
+      "subject": "Gagal download invoice tagihan INV-2026-09",
+      "message": "Halo support GoodevaDesk, saat saya klik unduh invoice di menu Billing, muncul error 404. Mohon kirimkan salinan faktur September kami."
+    },
+    "gliner": {
+      "category": "billing",
+      "confidence": 0.88,
+      "matched_intent": "rule-matched (billing)",
+      "latency_ms": 90.68,
+      "entities_count": 8,
+      "entities": [
+        {
+          "text": "404",
+          "label": "error_code",
+          "score": 0.95,
+          "start": 128,
+          "end": 131
+        },
+        {
+          "text": "invoice",
+          "label": "transaction_or_invoice_id",
+          "score": 0.92,
+          "start": 15,
+          "end": 22
+        },
+        {
+          "text": "INV-2026-09",
+          "label": "transaction_or_invoice_id",
+          "score": 0.92,
+          "start": 31,
+          "end": 42
+        },
+        {
+          "text": "error 404",
+          "label": "error_code",
+          "score": 0.8934,
+          "start": 122,
+          "end": 131
+        },
+        {
+          "text": "September",
+          "label": "date_or_time",
+          "score": 0.8919,
+          "start": 163,
+          "end": 172
+        },
+        {
+          "text": "GoodevaDesk",
+          "label": "company_name",
+          "score": 0.4734,
+          "start": 56,
+          "end": 67
+        },
+        {
+          "text": "Billing",
+          "label": "software_or_platform",
+          "score": 0.4546,
+          "start": 106,
+          "end": 113
+        },
+        {
+          "text": "Gagal",
+          "label": "customer_name",
+          "score": 0.3194,
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    "llm": {
+      "category": "billing",
+      "suggested_reply": "Halo, terima kasih telah menghubungi tim support kami terkait pertanyaan tagihan / pembayaran Anda. Kami sedang memeriksa rincian transaksi akun Anda dan akan segera memberikan konfirmasi lebih lanjut.",
+      "latency_ms": 663.85,
+      "provider": "Backend LLM (Gemini/Groq/Fallback)"
+    },
+    "comparison": {
+      "category_agreement": true,
+      "gliner_vs_llm_speedup": "7.32x faster (GLiNER)",
+      "summary": "Match"
+    }
+  },
+  {
+    "ticket": {
+      "customer_email": "dev@fintechcorp.io",
+      "subject": "API 500 Internal Server Error on POST /v1/transactions",
+      "message": "Gateway webhook server kami menerima HTTP 500 error saat sinkronisasi transaksi TRX-99812 di environment production sejak pukul 08:00 WIB."
+    },
+    "gliner": {
+      "category": "technical",
+      "confidence": 0.89,
+      "matched_intent": "rule-matched (technical)",
+      "latency_ms": 84.59,
+      "entities_count": 6,
+      "entities": [
+        {
+          "text": "500",
+          "label": "error_code",
+          "score": 0.95,
+          "start": 4,
+          "end": 7
+        },
+        {
+          "text": "HTTP 500",
+          "label": "error_code",
+          "score": 0.95,
+          "start": 92,
+          "end": 100
+        },
+        {
+          "text": "500 Internal Server Error",
+          "label": "error_code",
+          "score": 0.7744,
+          "start": 4,
+          "end": 29
+        },
+        {
+          "text": "WIB",
+          "label": "date_or_time",
+          "score": 0.4873,
+          "start": 189,
+          "end": 192
+        },
+        {
+          "text": "HTTP 500 error",
+          "label": "error_code",
+          "score": 0.4287,
+          "start": 92,
+          "end": 106
+        },
+        {
+          "text": "TRX-99812",
+          "label": "software_or_platform",
+          "score": 0.3395,
+          "start": 135,
+          "end": 144
+        }
+      ]
+    },
+    "llm": {
+      "category": "technical",
+      "suggested_reply": "Halo, terima kasih telah melaporkan kendala teknis ini. Tim teknis kami sedang menginvestigasi log sistem terkait masalah tersebut. Mohon informasikan jika Anda memiliki tangkapan layar atau pesan kesalahan tambahan.",
+      "latency_ms": 11.95,
+      "provider": "Backend LLM (Gemini/Groq/Fallback)"
+    },
+    "comparison": {
+      "category_agreement": true,
+      "gliner_vs_llm_speedup": "0.14x faster (GLiNER)",
+      "summary": "Match"
+    }
+  },
+  {
+    "ticket": {
+      "customer_email": "sarah.admin@megacorp.com",
+      "subject": "Akun admin terkunci dan butuh password reset",
+      "message": "Saya tidak bisa login ke dashboard admin panel karena salah password 3x berturut-turut. Tolong bantu reset kredensial akun saya."
+    },
+    "gliner": {
+      "category": "account",
+      "confidence": 0.6054,
+      "matched_intent": "account management",
+      "latency_ms": 81.92,
+      "entities_count": 4,
+      "entities": [
+        {
+          "text": "Saya",
+          "label": "customer_name",
+          "score": 0.5749,
+          "start": 45,
+          "end": 49
+        },
+        {
+          "text": "dashboard",
+          "label": "software_or_platform",
+          "score": 0.5324,
+          "start": 70,
+          "end": 79
+        },
+        {
+          "text": "saya",
+          "label": "customer_name",
+          "score": 0.4363,
+          "start": 168,
+          "end": 172
+        },
+        {
+          "text": "Akun admin",
+          "label": "email_address",
+          "score": 0.3524,
+          "start": 0,
+          "end": 10
+        }
+      ]
+    },
+    "llm": {
+      "category": "account",
+      "suggested_reply": "Halo, terima kasih telah menghubungi kami mengenai akun Anda. Demi keamanan, kami dapat membantu Anda melakukan verifikasi dan reset kredensial akun Anda. Tim kami akan memandu langkah selanjutnya.",
+      "latency_ms": 6.67,
+      "provider": "Backend LLM (Gemini/Groq/Fallback)"
+    },
+    "comparison": {
+      "category_agreement": true,
+      "gliner_vs_llm_speedup": "0.08x faster (GLiNER)",
+      "summary": "Match"
+    }
+  },
+  {
+    "ticket": {
+      "customer_email": "product.lead@startup.co",
+      "subject": "Request penambahan fitur Export CSV pada laporan bulanan",
+      "message": "Apakah bisa ditambahkan fitur tombol export ke format CSV atau Excel pada modul analytics tiket? Ini sangat membantu tim kami."
+    },
+    "gliner": {
+      "category": "feature_request",
+      "confidence": 0.85,
+      "matched_intent": "rule-matched (feature_request)",
+      "latency_ms": 80.33,
+      "entities_count": 3,
+      "entities": [
+        {
+          "text": "Excel",
+          "label": "software_or_platform",
+          "score": 0.9067,
+          "start": 120,
+          "end": 125
+        },
+        {
+          "text": "CSV",
+          "label": "software_or_platform",
+          "score": 0.8083,
+          "start": 32,
+          "end": 35
+        },
+        {
+          "text": "CSV",
+          "label": "software_or_platform",
+          "score": 0.7939,
+          "start": 111,
+          "end": 114
+        }
+      ]
+    },
+    "llm": {
+      "category": "feature_request",
+      "suggested_reply": "Halo, terima kasih atas masukan dan saran fitur yang sangat berharga bagi kami. Tim produk kami telah mencatat permintaan ini untuk pertimbangan pembaruan sistem ke depan.",
+      "latency_ms": 8.82,
+      "provider": "Backend LLM (Gemini/Groq/Fallback)"
+    },
+    "comparison": {
+      "category_agreement": true,
+      "gliner_vs_llm_speedup": "0.11x faster (GLiNER)",
+      "summary": "Match"
+    }
+  },
+  {
+    "ticket": {
+      "customer_email": "budi.santoso@gmail.com",
+      "subject": "Pertanyaan jam operasional customer service",
+      "message": "Selamat siang, apakah GoodevaDesk memiliki layanan customer service 24 jam untuk hari libur nasional?"
+    },
+    "gliner": {
+      "category": "general",
+      "confidence": 0.6,
+      "matched_intent": "rule-matched (general)",
+      "latency_ms": 76.08,
+      "entities_count": 3,
+      "entities": [
+        {
+          "text": "GoodevaDesk",
+          "label": "company_name",
+          "score": 0.79,
+          "start": 66,
+          "end": 77
+        },
+        {
+          "text": "24 jam",
+          "label": "date_or_time",
+          "score": 0.4569,
+          "start": 112,
+          "end": 118
+        },
+        {
+          "text": "hari libur nasional",
+          "label": "date_or_time",
+          "score": 0.356,
+          "start": 125,
+          "end": 144
+        }
+      ]
+    },
+    "llm": {
+      "category": "general",
+      "suggested_reply": "Halo, terima kasih telah menghubungi tim support kami. Kami telah menerima pesan Anda dan agen kami akan segera menindaklanjuti pertanyaan Anda secepatnya.",
+      "latency_ms": 10.43,
+      "provider": "Backend LLM (Gemini/Groq/Fallback)"
+    },
+    "comparison": {
+      "category_agreement": true,
+      "gliner_vs_llm_speedup": "0.14x faster (GLiNER)",
+      "summary": "Match"
+    }
+  }
+]

@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum TicketStatus {
+  open
+  in_progress
+  closed
+}
+
+model Organization {
+  id         String   @id @default(uuid())
+  name       String
+  apiKey     String   @unique @map("api_key")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  tickets    Ticket[]
+
+  @@map("organizations")
+}
+
+model Ticket {
+  id              String       @id @default(uuid())
+  organizationId  String       @map("organization_id")
+  customerEmail   String       @map("customer_email")
+  subject         String
+  message         String       @db.Text
+  category        String?      // hasil klasifikasi LLM, mis. billing, technical, general
+  suggestedReply  String?      @map("suggested_reply") @db.Text // draft balasan hasil LLM
+  status          TicketStatus @default(open)
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([organizationId, status])
+  @@index([organizationId, category])
+  @@map("tickets")
+}

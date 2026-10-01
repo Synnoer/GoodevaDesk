@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+# Build output
+*.tsbuildinfo
+dist/
+build/
+out/
+# Cache
+*.pyc
+# Environment
+.env

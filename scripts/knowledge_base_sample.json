@@ -1,0 +1,99 @@
+[
+  {
+    "title": "Cara Mengatasi Masalah Tagihan dan Invoice",
+    "category": "billing",
+    "chunks": [
+      "Jika invoice tidak dapat diunduh atau status pembayaran belum diperbarui setelah transfer, pengguna dapat mengirimkan bukti transfer ke billing support. Sistem memproses verifikasi otomatis dalam waktu 10-15 menit."
+    ],
+    "keywords": [
+      "dapat",
+      "transfer",
+      "jika",
+      "invoice",
+      "tidak"
+    ],
+    "entities": [
+      {
+        "text": "invoice",
+        "label": "transaction_or_invoice_id",
+        "score": 0.92,
+        "start": 5,
+        "end": 12
+      },
+      {
+        "text": "pengguna",
+        "label": "customer_name",
+        "score": 0.3904,
+        "start": 91,
+        "end": 99
+      }
+    ]
+  },
+  {
+    "title": "Panduan Reset Password dan Autentikasi Akun",
+    "category": "account",
+    "chunks": [
+      "Untuk mereset kata sandi, silakan klik tombol 'Lupa Password' di halaman login. Tautan reset akan dikirimkan ke email terdaftar dan berlaku selama 60 menit."
+    ],
+    "keywords": [
+      "mereset",
+      "kata",
+      "sandi",
+      "silakan",
+      "klik"
+    ],
+    "entities": [
+      {
+        "text": "email",
+        "label": "email_address",
+        "score": 0.8736,
+        "start": 112,
+        "end": 117
+      },
+      {
+        "text": "Tautan reset",
+        "label": "error_code",
+        "score": 0.301,
+        "start": 80,
+        "end": 92
+      }
+    ]
+  },
+  {
+    "title": "Integrasi Webhook dan Penanganan Error HTTP 500",
+    "category": "technical",
+    "chunks": [
+      "Ketika endpoint webhook mengembalikan status HTTP 500, gateway GoodevaDesk akan melakukan retry otomatis sebanyak 3 kali dengan exponential backoff. Pastikan server penerima membalas dengan status 200 OK."
+    ],
+    "keywords": [
+      "status",
+      "ketika",
+      "endpoint",
+      "webhook",
+      "mengembalikan"
+    ],
+    "entities": [
+      {
+        "text": "200 OK",
+        "label": "error_code",
+        "score": 0.6193,
+        "start": 197,
+        "end": 203
+      },
+      {
+        "text": "HTTP 500",
+        "label": "error_code",
+        "score": 0.5674,
+        "start": 45,
+        "end": 53
+      },
+      {
+        "text": "GoodevaDesk",
+        "label": "software_or_platform",
+        "score": 0.5348,
+        "start": 63,
+        "end": 74
+      }
+    ]
+  }
+]
