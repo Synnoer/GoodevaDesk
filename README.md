@@ -2,7 +2,7 @@
 
 Backend service internal customer support dengan arsitektur **Multi-Tenant Data Isolation**, **Otomasi Klasifikasi & Draft Balasan AI (Google Gemini & Groq API)**, **Redis Caching**, **Prisma ORM + PostgreSQL**, dan **Docker Containerization**.
 
-### 1. Menggunakan Docker 
+###  Setup
 ```bash
 # Salin konfigurasi environment
 cp .env.example .env
@@ -12,24 +12,6 @@ docker compose up -d
 
 # Akses Swagger UI
 open http://localhost:3000/docs
-```
-
-### 2. Tanpa Docker 
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Jalankan PostgreSQL dan Redis
-docker compose up -d postgres redis
-
-# 3. Sinkronkan database schema
-npx prisma db push
-
-# 4. Seed data awal (Acme Corp & Stark Industries)
-npm run seed
-
-# 5. Jalankan aplikasi
-npm run start:dev
 ```
 
 ### Cara Menjalankan Benchmark GLiNER vs LLM:
